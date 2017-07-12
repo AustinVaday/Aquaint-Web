@@ -2683,6 +2683,14 @@ nav.navbar-slide.show-menu { top: 0; }
 	color: #ccc;
 }
 
+.appstore-btn {
+	float: right;
+	cursor: pointer;
+	line-height: 60px;
+	font-size: 24px;
+	padding: 16 20 0 20px;
+	color: #ccc;
+}
 
 @media (max-width: 992px) {
 .navbar-collapse {
@@ -3962,14 +3970,14 @@ label.error {
 
 footer {
 	text-align: center;
-	padding: 100px 0;
-	background: #222;
-	color: #888;
+	padding: 10px 0;
+	background: #3d5953;
+	color: #3d5953; 
 }
 
 footer .copyright {
 	display: block;
-	margin: 40px 0 0 0;
+	margin: 20px 0 0 0;
 }
 
 .copyright a {
@@ -3979,7 +3987,7 @@ footer .copyright {
 
 @media (max-width: 992px) {
 
-footer { padding: 80px 0; }
+footer { padding: 10px 0; }
 
 }
 
