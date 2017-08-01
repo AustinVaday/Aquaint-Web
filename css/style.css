@@ -2605,7 +2605,7 @@ button#contact_submit:hover { border: 2px solid #00aeff; }
 
 nav.navbar-fixed-top {
 	height: 60px;
-	background: #fff;
+	background: #0F7A9D;
 	border-bottom: 2px solid #eee;
 	-webkit-transition: all 0.8s ease-in-out;
 	-moz-transition: all 0.8s ease-in-out;
@@ -2638,6 +2638,7 @@ nav.navbar-slide.show-menu { top: 0; }
 	border-bottom: 2px solid #eee;
 	outline: none;
 	background:inherit;
+	color: #ffffff;
 }
 
 .navbar .nav li:last-child a { }

@@ -57,6 +57,7 @@
 
 </head>
 
+
 <body data-spy="scroll" data-target=".navMenuCollapse">
 
   <!-- PRELOADER-->
@@ -70,9 +71,9 @@
   <div id="wrap">
 
     <!-- NAVIGATION BEGIN -->
-    <nav class="navbar navbar-fixed-top navbar-slide">
+    <nav class="navbar navbar-fixed-top">
       <div class="container_fluid">
-        <a class="navbar-brand goto" href="index.html#wrap"> <img src="./static/images/logo_nav.svg" alt="Your logo" height="38" width="152" /> </a>
+        <a class="navbar-brand goto" href="index.html#wrap"> <img src="./static/images/logo.svg" alt="Your logo" height="38" width="152" /> </a>
         <a class="contact-btn icon-envelope" data-toggle="modal" data-target="#modalContact"></a>
         <button class="navbar-toggle menu-collapse-btn collapsed" data-toggle="collapse" data-target=".navMenuCollapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
         <div class="collapse navbar-collapse navMenuCollapse">
@@ -99,46 +100,46 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 col-sm-12">
-            <!-- max-height: 120px; max-width: 480px
-
-					height:auto; width: auto; max-height: 100%; max-width: 100%;  -->
-            <img class="logo" style="max-height: 125px; max-width:500px; width: 80%;" src="./static/images/logo.svg" alt="Aquaint Logo" />
-<div>
+<div class="welcome-div" id="signup-elem">
 <component :is="current"></component>
-
 <br>
-<button id="continue" v-show='!reg'@click="toRegistration">
-<a>Continue</a>
+<button class="welcome-button" id="continue" v-show='!reg'@click="toRegistration">
+<a class="welcome-hyperlink">Continue</a>
 </button>
-<p v-show='!reg'> Already registered?
-<b><a class="one" href="#SignIn">Sign in here.</a></b></p>
+<p v-show='!reg'> Already registered? 
+<b><a class="one welcome-hyperlink" href="#SignIn">Sign in here.</a></b></p>
 
-<button id="continue" v-show="reg" @click="toHome" ><a>Join Aquaint</a></button>
-
-<div id="aquaint-login">
-  <template id="signup">
-    <h1>Let's get Aquainted.</h1>
-    <p> Sign up with... </p>
-    <button @click="Facebook">
-      <a>Facebook</a></button>
-    <p> Or, sign up with email </p>
-    <input v-model="email" placeholder="Email">
-    <br>
-    <input v-model="fullname" placeholder="Full Name">
-    <br>
-  </template>
-
-  <template id="registration">
-    <h1>Welcome</h1>
-    <input v-model="username" placeholder="Username">
-    <br>
-    <input type="password" v-model="password1" placeholder="Password">
-    <br>
-    <input type="password" v-model="password2" placeholder="Verify Password">
-    <br>
-  </template>
+<button class ="welcome-button" id="continue" v-show="reg" @click="toHome" ><a>Join Aquaint</a></button>
 </div>
-</div>
+<template id="signup">
+   <div>
+   <img src="static/images/emblemSpinner.gif" height="100"/>
+   <h1 class="welcome-header">Let's get Aquainted.</h1>
+   <p> Sign up with... </p>
+   <button class="welcome-button" @click="Facebook">
+   <a>Facebook</a></button>
+   <p> Or, sign up with email </p>
+   <input class="welcome-input" v-model="email" placeholder="Email">
+   <br>
+   <input class="welcome-input" v-model="fullname" placeholder="Full Name">
+   <br>
+   </div>
+</template>
+<template id="registration">
+   <div>
+   <h1 class="welcome-header">Welcome</h1>
+   <input class="welcome-input" v-model="username" placeholder="Username">
+   <br>
+   <input class="welcome-input" type="password" v-model="password1" placeholder="Password">
+   <br>
+   <input class="welcome-input" type="password" v-model="password2" placeholder="Verify Password">
+  <br>
+  </div>
+</template>
+
+
+
+
 
             <!--<a href="#social" class="round-btn-fill-blue">Request Early Access</a> -->
 
@@ -203,7 +204,6 @@
           </div>
         </div>
       </div>
-      <div class="block-bg" data-stellar-ratio="0.4"></div>
 
       <!--Learn more button-->
       <a href="#getAquainted">
@@ -789,33 +789,29 @@
 <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: '6bfd638e-e22b-46a8-97b6-6f79e1325b25', f: true }); done = true; } }; })();</script>
 </body>
 
-</html>
-
-<!-- Vue script for user authentication -->
-<!-- <script type='text/javascript'> -->
-<!--     	Vue.component('signup',{ -->
-<!-- 	    template:'#signup' -->
-<!-- 	}) -->
-<!-- 	Vue.component('registration',{ -->
-<!-- 	    template:'#registration' -->
-<!-- 	}) -->
-	
-<!-- 	var userLogin = new Vue({ -->
-<!-- 	    data:{ -->
-<!-- 		current:"signup", -->
-<!-- 		reg: false -->
-<!-- 	    }, -->
-<!-- 	    methods:{ -->
-<!-- 		toRegistration:function(){ -->
-<!-- 		    this.reg = true, -->
-<!-- 		    this.current = 'registration' -->
-<!-- 		}, -->
-<!-- 		toHome: function(){ -->
-<!-- 		    this.current = 'signup', -->
-<!-- 		    this.reg = false; -->
-<!-- 		}, -->
-<!-- 	    }, -->
-<!-- 	    components:['signup','registration'],  -->
-<!-- 	}) -->
-<!-- 	userLogin.$el === document.getElementById('aquaint-login') -->
-<!-- </script> -->
+<script>
+Vue.component('signup',{
+	template:'#signup'
+})
+Vue.component('registration',{
+	template:'#registration'
+})
+new Vue({
+  el: 'signup-elem',	
+  data:{
+  	current:'registration',
+    reg: true 
+  },
+  methods:{
+  	toRegistration:function(){
+    	this.reg = true,
+    	this.current = 'registration'
+    },
+    toHome: function(){
+    this.current = 'signup',
+      this.reg = false;
+    },
+  },
+  components:['signup','registration'] 
+})
+</script>
