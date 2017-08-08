@@ -100,47 +100,10 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 col-sm-12">
-<div class="welcome-div" id="signup-elem">
-<component :is="current"></component>
-<br>
-<button class="welcome-button" id="continue" v-show='!reg'@click="toRegistration">
-<a class="welcome-hyperlink">Continue</a>
-</button>
-<p v-show='!reg'> Already registered? 
-<b><a class="one welcome-hyperlink" href="#SignIn">Sign in here.</a></b></p>
-
-<button class ="welcome-button" id="continue" v-show="reg" @click="toHome" ><a>Join Aquaint</a></button>
-</div>
-<template id="signup">
-   <div>
-   <img src="static/images/emblemSpinner.gif" height="100"/>
-   <h1 class="welcome-header">Let's get Aquainted.</h1>
-   <p> Sign up with... </p>
-   <button class="welcome-button" @click="Facebook">
-   <a>Facebook</a></button>
-   <p> Or, sign up with email </p>
-   <input class="welcome-input" v-model="email" placeholder="Email">
-   <br>
-   <input class="welcome-input" v-model="fullname" placeholder="Full Name">
-   <br>
-   </div>
-</template>
-<template id="registration">
-   <div>
-   <h1 class="welcome-header">Welcome</h1>
-   <input class="welcome-input" v-model="username" placeholder="Username">
-   <br>
-   <input class="welcome-input" type="password" v-model="password1" placeholder="Password">
-   <br>
-   <input class="welcome-input" type="password" v-model="password2" placeholder="Verify Password">
-  <br>
-  </div>
-</template>
 
 
-
-
-
+			<!-- TEST REACT JS -->
+			<div id="container-time"> </div>
             <!--<a href="#social" class="round-btn-fill-blue">Request Early Access</a> -->
 
             <div class="container-fluid" style="float:left" id="aquaint-login">
@@ -762,8 +725,11 @@
   <script src="static/scripts/retina.min.js"></script>
   <script src="static/scripts/typed.js"></script>
   <script src="static/scripts/custom.js"></script>
-  <script src="https://unpkg.com/vue"></script>
   <script src="static/scripts/welcome.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
 
   <script>
     $(function() {
@@ -789,29 +755,14 @@
 <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: '6bfd638e-e22b-46a8-97b6-6f79e1325b25', f: true }); done = true; } }; })();</script>
 </body>
 
-<script>
-Vue.component('signup',{
-	template:'#signup'
-})
-Vue.component('registration',{
-	template:'#registration'
-})
-new Vue({
-  el: 'signup-elem',	
-  data:{
-  	current:'registration',
-    reg: true 
-  },
-  methods:{
-  	toRegistration:function(){
-    	this.reg = true,
-    	this.current = 'registration'
-    },
-    toHome: function(){
-    this.current = 'signup',
-      this.reg = false;
-    },
-  },
-  components:['signup','registration'] 
-})
+<!-- REACT JS CODE/COMPONENTS -->
+<script type="text/babel">
+  var Hello = React.createClass({
+    render: function (){
+      return (<div>Hello at {this.props.now}</div>);
+    } 
+  });
+  
+  ReactDOM.render(<Hello now={new Date().toString()}/>, document.getElementById('container-time'));
+
 </script>
