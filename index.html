@@ -105,6 +105,7 @@
 	      <!-- TEST REACT JS -->
 	      <div id="container-time"></div>
 	      <div id="container-time2"></div>
+	      <div id="userlogin"></div>
             <!--<a href="#social" class="round-btn-fill-blue">Request Early Access</a> -->
 
             <div class="container-fluid" style="float:left" id="aquaint-login">
@@ -730,42 +731,155 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
-
-  <script src="static/scripts/react-test.js"></script>
-
-
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.77.0.min.js"></script>
+  <script src-"https://raw.githubusercontent.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
+  
   <script>
-    $(function() {
-      // This will select everything with the class smoothScroll
-      // This should prevent problems with carousel, scrollspy, etc...
-      $('.smoothScroll').click(function() {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-          if (target.length) {
-            $('html,body').animate({
-              scrollTop: target.offset().top
-            }, 1000); // The number here represents the speed of the scroll in milliseconds
-            return false;
-          }
-        }
-      });
-    });
+   $(function() {
+       // This will select everything with the class smoothScroll
+       // This should prevent problems with carousel, scrollspy, etc...
+       $('.smoothScroll').click(function() {
+           if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+               var target = $(this.hash);
+               target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+               if (target.length) {
+		   $('html,body').animate({
+		       scrollTop: target.offset().top
+		   }, 1000); // The number here represents the speed of the scroll in milliseconds
+		   return false;
+               }
+           }
+       });
+   });
   </script>
   <!--[if lte IE 9]>
-	<script src="static/scripts/respond.min.js"></script>
-<![endif]-->
-<script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: '6bfd638e-e22b-46a8-97b6-6f79e1325b25', f: true }); done = true; } }; })();</script>
+      <script src="static/scripts/respond.min.js"></script>
+  <![endif]-->
+  <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({c: '6bfd638e-e22b-46a8-97b6-6f79e1325b25', f: true }); done = true; } }; })();</script>
 </body>
 
 <!-- REACT JS CODE/COMPONENTS -->
 <script type="text/babel">
-  var Hello = React.createClass({
-    render: function (){
-      return (<div>Hello at {this.props.now}</div>);
-    } 
-  });
-  
-  ReactDOM.render(<Hello now={new Date().toString()}/>, document.getElementById('container-time'));
+ var Hello = React.createClass({
+     render: function (){
+	 return (<div>Hello at {this.props.now}</div>);
+     } 
+ });
+ 
+ ReactDOM.render(<Hello now={new Date().toString()}/>, document.getElementById('container-time'));
 
+</script>
+
+<script type="text/babel">
+    var UserSignupForm = React.createClass( {
+
+	// Note: instead of using a variable (or an Enum) to store currentPage,
+	// it should be stored in the Component state, for possible re-rendering
+	
+	getInitialState: function() {
+	    return {
+		currentPage: 0,  // 0 for first part of sign-up, 1 for second part, 2 for user login
+		email: '',
+		fullname: '',
+		username: '',
+		password: '',
+		passwordVerify: ''
+	    };
+	},
+
+	handleChange: function(event) {
+	    this.setState({[event.target.name]: event.target.value});
+	},
+
+	handleContinue: function(event) {
+	    event.preventDefault();
+
+	    console.log("Changing to next signup page...");
+	    // Component state must be set by setState() function for necessary
+	    // parts to be re-rendered
+	    // this.state.currentPage = 1;
+	    this.setState({currentPage: 1});
+	},
+	
+	handleSignup: function(event) {
+	    event.preventDefault();
+
+	    console.log('User completes sign-up form: ' + JSON.stringify(this.state));
+
+	    if (this.state.password != this.state.passwordVerify) {
+		alert("Passwords don't match; please try again.");
+	    }
+	    
+	    // Sign up user in AWS Cognito Federated Identity
+	    var poolData = {
+		UserPoolId : COGNITO_USER_POOL_ID,
+		ClientId : COGNITO_CLIENT_ID
+	    };
+	    var userPool = new CognitoUserPool(poolData);
+
+	    var attributeList = [];
+
+	    var dataEmail = {
+		Name : 'email',
+		Value : this.state.email
+	    };
+	    var attributeEmail = new CognitoUserAttribute(dataEmail);
+	    attributeList.push(attributeEmail);
+
+	    userPool.signUp(this.state.username, this.state.password, attributeList, null, function(err, result) {
+		if (err) {
+		    alert(err);
+		    return;
+		}
+		var cognitoUser = result.user;
+		console.log('user name is ' + cognitoUser.getUsername());
+	    });	 
+	},
+
+	handleLogin: function(event) {
+	    event.preventDefault();
+
+	    this.setState({currentPage: 2});
+	},
+
+	render() {
+	    if (this.state.currentPage == 0) {
+		console.log('userlogin div is rendered at initial state...')
+		return (
+		    <form onSubmit={this.handleContinue}>
+		      Email:
+		      <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+		      Full Name:
+		      <input type="text" name="fullname" value={this.state.fullname} onChange={this.handleChange}/>
+		      <input type="submit" value="Continue"/>
+		      <p>
+			<a href="#" onClick={this.handleLogin}>
+			  Already registered? Sign in here.
+			</a>
+		      </p>
+		    </form>
+		);
+	    } else if (this.state.currentPage == 1) {
+		return (
+		    <form onSubmit={this.handleSignup}>
+		      Username:
+		      <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+		      Password:
+		      <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+		      Verify Password:
+		      <input type="password" name="passwordVerify" value={this.state.passwordVerify} onChange={this.handleChange}/>
+		      <input type="submit" value="Join Aquaint"/>
+		    </form>
+		);
+	    } else if (this.state.currentPage == 2) {
+		return (
+		    <UserLoginForm />
+		);
+	    }
+	    return null;
+	}
+    });
+
+console.log('ReactDOM.render is called.');
+ReactDOM.render(<UserSignupForm />, document.getElementById('userlogin'));
 </script>
