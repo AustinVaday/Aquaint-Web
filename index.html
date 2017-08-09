@@ -861,21 +861,24 @@
               console.log('userlogin div is rendered at initial state...')
               return (
                 <div className ="welcome-div">
-                   <img height="15%" src="./images/emblemSpinner.gif" />
+                   <img height="15%" src="./images/Aquaint_welcome_logo.svg" />
                    <h1 className="welcome-header">Let's get Aquainted.</h1>
-                   <p> Sign up with... </p>
-                   <button className="welcome-button">
-                   <a>Facebook</a></button>
-                   <p> Or, sign up with email </p>
+                   <h2 className="welcome-subtitle">All your social media profiles in one place.</h2>
+                   <p className="welcome-instruction"> Sign up with... </p>
+                   <button className="welcome-button" id="fb-button">
+                   <img  id="image-padding" height="50%" src="./images/facebook_login_icon.svg" /><a id="fb-padding">Facebook</a>
+                   </button>
+                   <br/> <br/><br/>
+                   <p className="welcome-instruction"> Or, sign up with email </p>
                    <form onSubmit={this.handleContinue}>
                        <input className="welcome-input" type="text" name="email" placeholder="Email"  value={this.state.email} onChange={this.handleChange}/>
                        <br />
                        <input className="welcome-input" stype="text" name="fullname" placeholder="Name" value={this.state.fullname} onChange={this.handleChange}/>
                        <br />
                        <button className="welcome-button" id="continue">
-                    <a className="welcome-hyperlink">Continue</a>
+                    <a className="welcome-continue">Continue</a>
                     </button>
-                    <p> Already registered? <a href="#" onClick={this.handleLogin}>
+                    <p className="welcome-instruction"> Already registered? <a className="welcome-signin" href="#" onClick={this.handleLogin}>
                        Sign in here.
                     </a></p>
                   </form>
@@ -884,15 +887,18 @@
           } else if (this.state.currentPage == 1) {
               return (
                 <div className ="welcome-div">
+                <img height="15%" src="./images/Aquaint_welcome_logo.svg" />
+                <h1 className="welcome-header">Welcome</h1>
+                <h2 className="welcome-subtitle">You're one step away from a brand new experience</h2>
+                <br/><br/>
                   <form onSubmit={this.handleSignup}>
-                     <h1 className="welcome-header">Welcome</h1>
                      <input className="welcome-input" placeholder="Username"  name="username" value={this.state.username} onChange={this.handleChange} />
                      <br />
                      <input className="welcome-input" placeholder="Password" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                      <br />
                      <input className="welcome-input" placeholder="Verify Password" type="password" name="password" value={this.state.passwordVerify} onChange={this.handleChange} />
                     <br />
-                    <button className ="welcome-button" ><a>Join Aquaint</a></button>
+                    <button className ="welcome-button" id="continue"><a className="welcome-continue">Join Aquaint</a></button>
                   </form>
                 </div>
               );
@@ -981,13 +987,18 @@
 
       render: function() {
           return (
-            <form onSubmit={this.handleSubmit}>
-              Username:
-              <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-              Password:
-              <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
-              <input type="submit" value="Log In"/>
-            </form>
+            <div className ="welcome-div">
+            <img height="15%" src="./images/Aquaint_welcome_logo.svg" />
+            <h1 className="welcome-header">Welcome back!</h1>
+            <br/><br/>
+              <form onSubmit={this.handleSubmit}>
+                 <input className="welcome-input" placeholder="Username"  name="username" value={this.state.username} onChange={this.handleChange} />
+                 <br />
+                 <input className="welcome-input" placeholder="Password" type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                 <br />
+                <button type="submit" className ="welcome-button" id="continue"><a className="welcome-continue">Login</a></button>
+              </form>
+            </div>
           );
       },
 
