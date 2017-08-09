@@ -100,9 +100,7 @@
     <header id="full-intro" class="intro-block">
       <div class="container">
         <div class="row">
-          <div class="col-md-8 col-sm-12">
-
-
+          <div class="col-md-4 col-sm-12">
 	      <!-- TEST REACT JS -->
 	      <div id="userlogin"></div>
             <!--<a href="#social" class="round-btn-fill-blue">Request Early Access</a> -->
@@ -154,14 +152,15 @@
         </a> -->
 
           </div>
-          <div class="col-md-4 hidden-sm hidden-xs">
+          <div class="col-md-8 hidden-sm hidden-xs">
             <!-- height="773" width="400"
 						833 469 -->
             <!--<img class="intro-screen wow bounceInUp" data-wow-delay="0.5s" src="./images/iPhone6-Silver.gif" height="714" width="402" alt="" />-->
             <div class="intro-screen wow bounceInUp" data-wow-delay="0.5s">
-              <div id="launchScreen">
-                <div id="emblemSpinner"></div>
-              </div>
+              <!-- <div id="launchScreen"> -->
+                <!-- <div id="emblemSpinner"></div> -->
+              <img height="80%" src="./images/app_demo_landing.png" />
+              <!-- </div> -->
             </div>
 
 
@@ -862,6 +861,7 @@
               console.log('userlogin div is rendered at initial state...')
               return (
                 <div className ="welcome-div">
+                   <img height="15%" src="./images/emblemSpinner.gif" />
                    <h1 className="welcome-header">Let us get Aquainted.</h1>
                    <p> Sign up with... </p>
                    <button className="welcome-button">
