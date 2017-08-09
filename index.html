@@ -728,7 +728,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.77.0.min.js"></script>
-  <script src-"https://raw.githubusercontent.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script>
+  <!-- <script src="https://raw.githubusercontent.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
+       <script src="https://raw.githubusercontent.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.min.js"></script> -->
+  <!-- this is a workaround for sripts on GitHub -->
+  <!-- See: https://stackoverflow.com/questions/17341122/link-and-execute-external-javascript-file-hosted-on-github -->
+  <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/aws-cognito-sdk.min.js"></script>
+  <script src="https://rawgit.com/aws/amazon-cognito-identity-js/master/dist/amazon-cognito-identity.js"></script>
+  <!-- <script type="text/babel" src="https://rawgit.com/aws/amazon-cognito-identity-js/master/src/AuthenticationDetails.js"></script> -->
+  <!-- <script type="text/babel" src="scripts/AuthenticationDetails.js"></script> -->
+
 
   <script>
    $(function() {
@@ -767,5 +775,4 @@
 </script>
 
 <!-- Variables in embedded scripts have global scope; later scripts can access those in previous scripts -->
-<script type="text/babel" src="jsx/userLoginForm.jsx"></script>
-<script type="text/babel" src="jsx/userSignupForm.jsx"></script>
+<script type="text/babel" src="jsx/userAuthForm.jsx"></script>

@@ -46,9 +46,8 @@ var UserLoginForm = React.createClass( {
 	    Username: this.state.username,
 	    Password: this.state.password,
 	};
-
-	var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-
+	// var authenticationDetails = new AWS.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
+	var authenticationDetails = new AuthenticationDetails(authenticationData);
 	var poolData = {
 	    UserPoolId: COGNITO_USER_POOL_ID,
 	    ClientId: COGNITO_CLIENT_ID
@@ -164,7 +163,7 @@ var UserSignupForm = React.createClass({
                 return;
             }
             var cognitoUser = result.user;
-            alert('User sign up successful: Welcome, ' + cognitoUser.getUsername() + '! ');
+            console.log('user name is ' + cognitoUser.getUsername());
         });
     },
 
