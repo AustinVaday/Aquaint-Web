@@ -45,6 +45,7 @@
   <link rel="stylesheet" href="static/css/style.css" />
   <!-- <link rel="stylesheet" href="static/css/style-black.css"/> -->
   <link rel="stylesheet" href="static/css/welcome-style.css" />
+    <link rel="stylesheet" href="static/css/nl-css.css" />
 
 
   <!-- Favicons -->
@@ -771,7 +772,6 @@
 </script>
 
 <script type="text/babel">
-
  let COGNITO_REGION = 'us-east-1';
  let COGNITO_IDENTITY_POOL_ID = 'us-east-1:ca5605a3-8ba9-4e60-a0ca-eae561e7c74e';
  let COGNITO_USER_POOL_ID = 'us-east-1_yyImSiaeD';
@@ -787,7 +787,7 @@
 
      // Note: instead of using a variable (or an Enum) to store currentPage,
      // it should be stored in the Component state, for possible re-rendering
-     
+
      getInitialState: function() {
 	 return {
 	     currentPage: 0,  // 0 for first part of sign-up, 1 for second part, 2 for user login
@@ -854,23 +854,26 @@
 	 this.setState({currentPage: 2});
      },
 
+
      render() {
+
 	 if (this.state.currentPage == 0) {
 	     console.log('userlogin div is rendered at initial state...')
 	     return (
-		 <form onSubmit={this.handleContinue}>
-		     Email:
-		     <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-		     Full Name:
-		     <input type="text" name="fullname" value={this.state.fullname} onChange={this.handleChange}/>
+ <div>
+   <p>A place to connect all your social media</p>
+ <form onSubmit={this.handleContinue}>
+		     <input style={"backgroundColor: 'black'"} type="text" name="email" placeholder="Email"  value={this.state.email} onChange={this.handleChange}/>
+		     <input stype="text" name="fullname" placeholder="Name" value={this.state.fullname} onChange={this.handleChange}/>
 		     <input type="submit" value="Continue"/>
-		     <p>
-			 <a href="#" onClick={this.handleLogin}>
-			     Already registered? Sign in here.
-			 </a>
-		     </p>
+		    
+			 <p> Already registered? <a href="#" onClick={this.handleLogin}>
+			    Sign in here.
+			 </a></p>
+		    
 		 </form>
-	     );
+</div>
+ );
 	 } else if (this.state.currentPage == 1) {
 	     return (
     <form onSubmit={this.handleSignup}>
