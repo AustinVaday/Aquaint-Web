@@ -1,4 +1,4 @@
-var UserLoginForm = React.createClass({
+var UserLoginForm = React.createClass( {
     // Make the form to be "Controlled Components"
     // that is, making the React state be the "single source of truth"
     // See: https://facebook.github.io/react/docs/forms.html
@@ -85,6 +85,3 @@ var UserLoginForm = React.createClass({
     },
 
 });
-
-console.log('ReactDOM.render is called.');
-ReactDOM.render( < UserSignupForm / > , document.getElementById('userlogin'));

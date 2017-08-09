@@ -127,8 +127,10 @@ var UserSignupForm = React.createClass({
               );
           } else if (this.state.currentPage == 2) {
               return ( <UserLoginForm /> );
-		  }
-		  return null;
-		  }
-		  });
+          }
+          return null;
+    }
+});
 
+console.log('ReactDOM.render is called.');
+ReactDOM.render( < UserSignupForm /> , document.getElementById('userlogin'));
